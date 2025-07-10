@@ -19,6 +19,8 @@ class _SignUpPageState extends State<SignUpPage> {
   final _phoneController = TextEditingController();
   final _passwordController = TextEditingController();
   final _confirmPasswordController = TextEditingController();
+  bool _passwordVisible = false;
+  bool _confirmPasswordVisible = false;
   bool _isLoading = false;
 
   var rool = "user";
@@ -85,24 +87,44 @@ class _SignUpPageState extends State<SignUpPage> {
           _buildTextFormField(_fullnameController, 'Full Name', screenHeight),
           _buildTextFormField(_phoneController, 'Number Phone', screenHeight),
           _buildTextFormField(_emailController, 'Email', screenHeight),
-          _buildTextFormField(_passwordController, 'Password', screenHeight,
-              isPassword: true),
+          _buildTextFormField(
+            _passwordController,
+            'Password',
+            screenHeight,
+            isPassword: true,
+            isObscure: !_passwordVisible,
+            onToggleVisibility: () {
+              setState(() {
+                _passwordVisible = !_passwordVisible;
+              });
+            },
+          ),
           _buildTextFormField(
               _confirmPasswordController, 'Confirm password', screenHeight,
-              isPassword: true),
+              isObscure: !_confirmPasswordVisible, onToggleVisibility: () {
+            setState(() {
+              _confirmPasswordVisible = !_confirmPasswordVisible;
+            });
+          }, isPassword: true),
         ],
       ),
     );
   }
 
   Widget _buildTextFormField(
-      TextEditingController controller, String hintText, double screenHeight,
-      {bool isPassword = false}) {
+    TextEditingController controller,
+    String hintText,
+    double screenHeight, {
+    bool isPassword = false,
+    bool isObscure = false,
+    VoidCallback? onToggleVisibility,
+    bool isVisible = false,
+  }) {
     return Padding(
       padding: EdgeInsets.only(bottom: screenHeight * 0.02),
       child: TextFormField(
         controller: controller,
-        obscureText: isPassword,
+        obscureText: isPassword ? isObscure : false,
         decoration: InputDecoration(
           hintText: hintText,
           hintStyle: TextStyle(color: Colors.grey[600]),
@@ -116,6 +138,16 @@ class _SignUpPageState extends State<SignUpPage> {
             borderRadius: BorderRadius.circular(8.0),
             borderSide: BorderSide(color: Colors.grey[600]!),
           ),
+          // Tambahkan suffixIcon jika isPassword
+          suffixIcon: isPassword
+              ? IconButton(
+                  icon: Icon(
+                    isVisible ? Icons.visibility : Icons.visibility_off,
+                    color: Colors.grey[600],
+                  ),
+                  onPressed: onToggleVisibility,
+                )
+              : null,
         ),
         validator: (value) => _validateField(value, hintText, isPassword),
       ),

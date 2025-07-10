@@ -51,10 +51,17 @@ class _ProfilePageState extends State<ProfilePage> {
         title: const Text(
           'TANTI MAKEUP',
           style: TextStyle(
-            fontWeight: FontWeight.w900,
-            letterSpacing: 2.0,
-            fontSize: 24,
+              fontWeight: FontWeight.w900,
+              letterSpacing: 2.0,
+              fontSize: 24,
+              color: Colors.white),
+        ),
+        leading: IconButton(
+          icon: const Icon(
+            Icons.arrow_back,
+            color: Colors.white,
           ),
+          onPressed: () => Navigator.of(context).pop(),
         ),
         backgroundColor: Colors.grey[800],
         elevation: 0,

@@ -19,10 +19,10 @@ void main() async {
   await Firebase.initializeApp(
     options: FirebaseOptions(
       apiKey: dotenv.env['FIREBASE_API_KEY'] ?? "",
-      appId: 'com.example.reservastion',
-      messagingSenderId: '429999301527',
-      projectId: 'reservation-47629',
-      storageBucket: 'reservation-47629.appspot.com',
+      appId: dotenv.env['FIREBASE_APP_ID'] ?? "",
+      messagingSenderId: dotenv.env['FIREBASE_MESSAGING_SENDER_ID'] ?? "",
+      projectId: dotenv.env['FIREBASE_PROJECT_ID'] ?? "",
+      storageBucket: dotenv.env['FIREBASE_STORAGE_BUCKET'] ?? "",
     ),
   );
 
@@ -37,15 +37,14 @@ class MyApp extends StatelessWidget {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'Auth App',
-      initialRoute: '/', // Halaman awal adalah halaman Login
+      initialRoute: '/',
       routes: {
-        '/': (context) => const RootPage(), // Rute untuk halaman Home
-        '/login': (context) => const LoginScreen(), // Rute untuk halaman Login
-        '/sign-up': (context) =>
-            const SignUpPage(), // Rute untuk halaman SignUp
+        '/': (context) => const RootPage(),
+        '/login': (context) => const LoginScreen(),
+        '/sign-up': (context) => const SignUpPage(),
         '/paket': (context) => const PaketPage(),
         '/home': (context) => const HomePage(),
-        '/admin-dashboard': (context) => const AdminDashboard(),
+        '/admin-dashboard': (context) => AdminDashboard(),
         '/success': (context) => const ThankYouPage(),
         '/order-history': (context) => OrderHistory(),
         '/order-in': (context) => const OrderIn(),

@@ -62,12 +62,14 @@ class _OrderInState extends State<OrderIn> {
     return Scaffold(
       backgroundColor: Colors.grey[100],
       appBar: AppBar(
+        iconTheme: const IconThemeData(color: Colors.white),
         title: const Text(
           'TANTI MAKEUP',
           style: TextStyle(
             fontWeight: FontWeight.w900,
             letterSpacing: 2.0,
             fontSize: 24,
+            color: Colors.white,
           ),
         ),
         backgroundColor: Colors.grey[800],
